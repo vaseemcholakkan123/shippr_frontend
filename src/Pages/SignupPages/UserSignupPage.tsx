@@ -15,32 +15,32 @@ function UserSignupPage() {
         toast.error("Enter a username")
         return false
       }
-      if(!password1){
+      else if(!password1){
         toast.error("Enter a password")
         return false
       }
 
-      if (username.includes(" ")){
+      else if (username.includes(" ")){
         toast.error("username contains space")
         return false;
       }
 
-      if (password1.includes(" ")){
+      else if (password1.includes(" ")){
         toast.error("password contains space")
         return false;
       }
 
-      if (password1.length < 7){
+      else if (password1.length < 7){
         toast.error("password should contain at least 8 characters")
         return false;
       }
 
-      if (password1 != password2){
+      else if (password1 != password2){
         toast.error("passwords don't match")
         return false;
       }
 
-      return true
+      else return true
     },
     []
   );

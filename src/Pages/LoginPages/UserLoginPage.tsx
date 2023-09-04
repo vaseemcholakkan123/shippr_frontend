@@ -85,7 +85,7 @@ function UserLoginPage() {
     <div className="row viewport-height gap-1 justify-content-center align-items-center">
       <div className="col-md-6 col-lg-4 col-12 auth-div">
         <h1 className="app-color">Shippr Login</h1>
-        <form className="auth-form" onClick={handleSubmit}>
+        <form className="auth-form" onSubmit={handleSubmit}>
           <label htmlFor="username">Username</label>
           <input type="text" name="username" />
 

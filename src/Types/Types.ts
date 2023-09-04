@@ -33,6 +33,8 @@ type cartitem = {
     quantity : number,
 }
 
+
+
 type order = {
     id : number,
     user : user,
@@ -40,6 +42,7 @@ type order = {
     quantity : number,
     total_price : number,
     purchased_on : string,
+    status : string
 }
 
 import { Dispatch , SetStateAction } from "react"

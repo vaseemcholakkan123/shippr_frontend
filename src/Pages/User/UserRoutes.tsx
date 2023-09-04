@@ -13,7 +13,8 @@ function UserRoutes() {
     <>
       <Navbar />
       <Routes>
-          <Route path='/' element={<UserHomePage />} />
+          <Route path='/*' element={<UserHomePage />} />
+          <Route path='/search/:prod_query' element={<UserHomePage />} />
           <Route path='/my-orders' element={ <LoginProtectedRoute> <OrderPage /> </LoginProtectedRoute> } />
           <Route path='/my-cart' element={ <LoginProtectedRoute > <CartPage /> </LoginProtectedRoute> } />
           <Route path='/view-product/:prod_id' element={ <DetailPage /> } />

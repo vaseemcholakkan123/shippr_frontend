@@ -1,27 +1,78 @@
-# React + TypeScript + Vite
+<h1 align="center" id="title">Shippr</h1>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<p id="description">A mini E-commerce project built with django and React</p>
 
-Currently, two official plugins are available:
+<h2>🚀 Demo</h2>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+[Live demo](dasd) <br>
+[API Doc](https://documenter.getpostman.com/view/25947467/2s9Y5eNfJh) <br>
+[Database Design](https://drawsql.app/teams/vaseem-1/diagrams/shippr-db)
 
-## Expanding the ESLint configuration
+<h2>Project Screenshots:</h2>
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+<img src="https://i.ibb.co/KjS1cXh/shippr1.png" alt="project-screenshot" width="500" height="350/">   <img src="https://i.ibb.co/BT5tpm9/shippr3.png" alt="project-screenshot" width="500" height="350/">
 
-- Configure the top-level `parserOptions` property like this:
+  
+  
+<h2>🧐 Features</h2>
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+Here're some of the project's best features:
+
+*   User registration and login
+*   Vendor registration and login
+*   Vendors can add,update or delete products
+*   Users can view and filter the products by category or vendor
+*   Users can search products based on name or description
+*   Users can add and remove products to or from cart
+*   Users can purchase products and trace thier orders
+*   Vendors can view or change status of orders placed on thier product
+
+
+<h2>🛠️ Installation Steps:</h2>
+
+<p>1. Clone the project</p>
+
+```
+git clone https://github.com/vaseemcholakkan123/shippr_backend.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+<p>2. Create a virtualenv</p>
+
+```
+virtualenv venv
+```
+
+<p>3. Activate venv</p>
+
+##### For Linux
+```
+source venv/bin/activate
+```
+##### For Windows
+```
+venv\Scripts\activate
+```
+
+<p>4. Install requirements</p>
+
+```
+pip install -r requirements.txt
+```
+
+<p>5. Start server</p>
+
+```
+python manage.py runserver
+```
+
+  
+  
+<h2>💻 Built with</h2>
+
+Technologies used in the project:
+
+*   Django
+*   React
+*   TypeScript
+*   DRF
+

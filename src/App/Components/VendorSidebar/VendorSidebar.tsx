@@ -1,8 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import "./../components.css";
 
-import React from "react";
-
 function VendorSidebar() {
     const Navigate = useNavigate()
 
@@ -27,6 +25,16 @@ function VendorSidebar() {
         onClick={()=>Navigate('/vendor/orders')}
       >
         Orders
+      </p>
+      <p
+        className={
+          window.location.pathname.split("/")[2] == "category"
+            ? "sidebar-item sidebar-item-active"
+            : "sidebar-item"
+        }
+        onClick={()=>Navigate('/vendor/category')}
+      >
+        Category
       </p>
     </div>
   );

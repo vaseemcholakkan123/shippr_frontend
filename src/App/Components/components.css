@@ -153,6 +153,7 @@
     cursor: pointer;
     border-radius: 7px;
     overflow: hidden;
+    max-width: 98%;
 }
 .order-card:hover{
     transform: scale(1.01);
@@ -165,4 +166,71 @@
 .order-texts{
     padding: .4rem;
     box-sizing: border-box;
+}
+.vendor-order-item{
+    cursor: pointer;
+}
+.vendor-order-item:hover{
+    text-decoration: underline;
+}
+
+.search-inp{
+    outline: none;
+    border: 1px solid rgba(128, 128, 128, 0.293);
+    font-size: medium;
+    padding: .3rem .4rem;
+    border-radius: 7px;
+    background-color: #7aafec;
+    color: white;
+}
+
+.search-inp-parent{
+    position: relative;
+}
+
+.mobile-search-inp-parent {
+    display: none;
+}
+
+.search-icon,
+.mobile-search-icon {
+    fill: white;
+}
+
+.search-icon{
+    position: absolute;
+    top: 2px;
+    right: 5px;
+}
+
+.mobile-search-icon {
+    display: none;
+}
+
+@media (max-width: 440px) {
+    .nav-actions {
+        padding-inline: .5rem;
+    }
+
+    .mobile-search-inp-parent {
+        display: block;
+        width: 90vw;
+    }
+    
+    .search-inp-parent{
+        display: none;
+    }
+
+    .search-inp {
+        width: 100%;
+    }
+
+    .mobile-search-icon {
+        display: block;
+    }
+
+    .search-icon {
+        right: 35px;
+        top: 13px;
+    }
 }

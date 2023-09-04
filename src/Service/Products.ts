@@ -18,9 +18,7 @@ export function get_object_url(file : File | string): string {
 export async function vendor_add_product(data : ( productform & { images: File[] } ) ) {
 
     try {
-        console.log(data);
-        
-        const response = await ShipprAxios.post('products/action/' , data , {headers : {"Content-Type" : "multipart/form-data"}});
+        const response = await ShipprAxios.post('products/create/' , data , {headers : {"Content-Type" : "multipart/form-data"}});
         return Promise.resolve(response)
 
     } catch (error) {
@@ -114,9 +112,16 @@ export async function add_or_remove_from_cart(prod_id:number) {
     }
 }
 
-export async function get_user_products(nexturl : string) {
+export async function get_user_products(nexturl : string , filter :{category : number , vendor : number , search : string}) {
     try {
-        const response = await ShipprAxios.get(`products/get-user-products/?${nexturl}`)
+
+        let url = `products/get-user-products/?${nexturl}`
+        if(filter.vendor != 0) url += `&vendor=${filter.vendor}` 
+        if(filter.category != 0) url += `&category=${filter.category}`         
+        let search_validated = filter.search.trim()
+        if(search_validated != "") url += `&search_query=${search_validated}`         
+
+        const response = await ShipprAxios.get(url)
         return Promise.resolve(response)
     } catch (error) {
         return Promise.reject()
@@ -139,4 +144,15 @@ export async function get_product_by_id(prod_id : string) {
     } catch (error) {
         return Promise.reject()
     }
+}
+
+export async function vendor_add_category(data:{name : string}) {
+
+try {
+    const response = await ShipprAxios.post('products/add-category/',data)
+    return Promise.resolve(response)
+} catch (error) {
+    return Promise.reject(error)
+}
+    
 }

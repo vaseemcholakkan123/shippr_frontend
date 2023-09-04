@@ -54,3 +54,13 @@ export async function vendor_register() {
     }
 
 }
+
+
+export async function get_vendors() {
+    try {
+        const response = await ShipprAxios.get('auth/get-all-vendors/')
+        return Promise.resolve(response)
+    } catch (error) {
+        return Promise.reject(error)
+    }
+}

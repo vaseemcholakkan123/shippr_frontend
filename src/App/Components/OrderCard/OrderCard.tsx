@@ -19,6 +19,7 @@ function OrderCard({ order }: orderCardProps) {
         <p>quantity : {order.quantity}</p>
         <p className="f-small">purchased : {updateTimeSince(order.purchased_on)} </p>
         <p className="f-small">paid : ₹‎ {order.total_price}</p>
+        <p className={order.status == "Pending" ? "f-small text-danger" : order.status == 'Shipped' ? "f-small text-warning" : "f-small text-success"}>status : {order.status}</p>
       </div>
     </div>
   );

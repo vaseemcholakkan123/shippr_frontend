@@ -1,4 +1,4 @@
-import React from "react";
+
 import { product } from "../../../Types/Types";
 import { updateTimeSince } from "../../../Service/Products";
 import { BASE_IMAGE_URL, IN_CART, TO_CART } from "../../Config/Constants";
@@ -8,15 +8,17 @@ import { useNavigate } from "react-router-dom";
 type productCardProps = {
   product: product;
   updateInHome: (prod_id: number) => void;
+  sm?: boolean;
 };
 
-function ProductCard({ product, updateInHome }: productCardProps) {
+function ProductCard({ product, updateInHome, sm=false }: productCardProps) {
   const Navigate = useNavigate();
 
   return (
-    <div key={product.id} className="product-card col-5 col-sm-3 bg-light">
+    <div key={product.id} className={`product-card bg-light ${sm ? 'col-5 col-md-3' : ''}`}>
       <div className="w-100">
         <img
+          loading="lazy"
           onClick={() => Navigate(`/view-product/${product.id}`)}
           src={BASE_IMAGE_URL + product.images[0]}
           alt=""

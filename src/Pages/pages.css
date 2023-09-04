@@ -115,6 +115,15 @@
     min-width: 80px;
 }
 
+.card-holder {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1.5fr));
+}
+
+@media screen and (max-width: 768px) {
+.card-holder {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1.5fr));
+}
+}
 
 
 .product-card{
@@ -146,9 +155,10 @@
     position: absolute;
     top: 15px;
     right: 15px;
-    width: 18px;
-    height: 18px;
+    width: 24px;
+    height: 24px;
     background-color: white;
+    padding: 4px;
 }
 .category-text{
     font-size: small;
@@ -177,5 +187,55 @@
     background-color: rgba(128, 128, 128, 0.096);
     border-radius: 7px;
     box-sizing: border-box;
-    padding: .6rem;
+    padding: .6 rem;
+}
+
+.filter-offcanvas{
+    display: flex;
+    flex-direction: column;
+    padding-top: 0;
+}
+
+.category-inp{
+    padding: .2rem .6rem;
+    font-size: medium;
+    border: 1px solid rgba(128, 128, 128, 0.264);
+    outline: none;
+}
+
+.category-row {
+    gap: 1rem;
+}
+
+.category-card{
+    box-sizing: border-box ;
+    padding: .3rem .6rem;
+    background-color: rgba(128, 128, 128, 0.196);
+    border-radius: 7px;
+    height: 50px;
+    align-items: center;
+}
+
+.product-card .dropdown {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.product-card .dropdown-menu {
+    right: 14px;
+    top: 40px;
+}
+
+@media (max-width: 440px) {
+    .main-header {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: flex-start;
+    }
+
+    .main-header .app-btn1 {
+        width: fit-content;
+        margin-left: auto;
+    }
 }

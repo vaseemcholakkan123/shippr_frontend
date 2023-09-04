@@ -1,27 +1,68 @@
-
 import { useNavigate } from "react-router-dom";
 import { order } from "../../../Types/Types";
-import { BASE_IMAGE_URL } from "../../Config/Constants";
 import "./../components.css";
 import { updateTimeSince } from "../../../Service/Products";
+import { Dispatch,SetStateAction } from "react";
 
 type orderCardProps = {
   order: order;
+  SetUpdateOrder : Dispatch<SetStateAction<order | null>>
 };
 
-function VendorOrderCard({ order }: orderCardProps) {
-    const Navigate = useNavigate()
+function VendorOrderCard({ order , SetUpdateOrder }: orderCardProps) {
+  const Navigate = useNavigate();
+
 
   return (
-    <div className="order-card col-12 col-sm-6 col-md-4 bg-light" onClick={()=>Navigate(`/view-product/${order.product.id}`)}>
-        <img src={ BASE_IMAGE_URL +  order.product.images[0]} width={100} height={100} alt="" />
-      <div className="order-texts">
-        <h6 className="m-0">Item : {order.product.name}</h6>
-        <p>quantity : {order.quantity}</p>
-        <p className="f-small">purchased : {updateTimeSince(order.purchased_on)} </p>
-        <p className="f-small">paid : ₹‎ {order.total_price}</p>
+      <div className="order-card col-11 col-sm-5 col-md-4 bg-light">
+        <div className="order-texts" onClick={() => SetUpdateOrder(order)}>
+          <h6
+            className="m-0"
+            onClick={() =>
+              order.product.id != 0 &&
+              Navigate(`/view-product/${order.product.id}`)
+            }
+          >
+            Item :{" "}
+            <span className="vendor-order-item">{order.product.name}</span>
+          </h6>
+          <p
+            data-bs-toggle="modal"
+            data-bs-target="#updateOrderModal"
+          >
+            quantity : {order.quantity}
+          </p>
+          <p
+            data-bs-toggle="modal"
+            data-bs-target="#updateOrderModal"
+            className="f-small"
+          >
+            purchased by : {order.user.username}{" "}
+            {updateTimeSince(order.purchased_on)}{" "}
+          </p>
+          <p
+            data-bs-toggle="modal"
+            data-bs-target="#updateOrderModal"
+            className="f-small"
+          >
+            paid : ₹‎ {order.total_price}
+          </p>
+          <p
+            data-bs-toggle="modal"
+            data-bs-target="#updateOrderModal"
+            className={
+              order.status == "Pending"
+                ? "f-small text-danger"
+                : order.status == "Shipped"
+                ? "f-small text-warning"
+                : "f-small text-success"
+            }
+          >
+            status : {order.status}
+          </p>
+        </div>
       </div>
-    </div>
+
   );
 }
 

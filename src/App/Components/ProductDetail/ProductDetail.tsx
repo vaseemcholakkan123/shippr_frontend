@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useRef, useState } from "react";
+import  { useCallback, useContext, useRef, useState } from "react";
 import { product, purchaseForm } from "../../../Types/Types";
 import "./../components.css";
 import { BASE_IMAGE_URL, IN_CART, TO_CART } from "../../Config/Constants";
@@ -59,6 +59,7 @@ function ProductDetail({ product, UpdateInDetailPage }: detailprops) {
                     }
                   >
                     <img
+                      loading="lazy"
                       src={BASE_IMAGE_URL + image}
                       className="d-block w-100"
                     />

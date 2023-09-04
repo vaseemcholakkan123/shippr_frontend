@@ -31,9 +31,9 @@ function App() {
           <Routes>
             <Route path="/*" element={< UserRoutes />} />
             <Route path="/vendor/*" element={ <ProtectedRoute> <VendorRoutes /> </ProtectedRoute> } />
-            <Route path="/auth/login" element={ user ? <Navigate to={'/'} /> : <UserLoginPage /> } />
+            <Route path="/auth/login" element={ localStorage.getItem("logged_user") ? <Navigate to={'/'} /> : <UserLoginPage /> } />
             <Route path="/auth/signup" element={ <UserSignupPage /> } />
-            <Route path="/auth/vendor-login" element={ user ? <Navigate to={'/'} /> : <VendorLoginPage /> } />
+            <Route path="/auth/vendor-login" element={ localStorage.getItem("logged_user") ? <Navigate to={'/'} /> : <VendorLoginPage /> } />
 
           </Routes>
         </BrowserRouter>

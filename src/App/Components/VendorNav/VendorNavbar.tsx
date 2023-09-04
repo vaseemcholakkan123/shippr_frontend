@@ -6,6 +6,7 @@ import { vendor_register } from "../../../Service/Auth";
 import { toast } from "react-hot-toast";
 import {
   CART_PNG,
+  CATEGORY,
   DEFAULT_USER_PROFILE,
   LOGOUT_PNG,
   ORDER_PNG,
@@ -41,7 +42,7 @@ function VendorNavbar() {
 
   return (
     <div className="navbar vendor-navbar">
-      <h2 onClick={() => Navigate("/vendor/")}>Shippr</h2>
+      <h2 onClick={() => Navigate("/")}>Shippr</h2>
 
       <div className="nav-actions">
         <p
@@ -77,6 +78,13 @@ function VendorNavbar() {
             >
               <img src={CART_PNG} alt="" />
               <p className="m-0">Orders</p>
+            </li>
+            <li
+              className="nav-dropdown dropdown-item d-flex d-sm-none"
+              onClick={() => Navigate("/vendor/category")}
+            >
+              <img src={CATEGORY} alt="" />
+              <p className="m-0">Category</p>
             </li>
             <li className="nav-dropdown dropdown-item" onClick={handleLogout}>
               <img src={LOGOUT_PNG} alt="" />

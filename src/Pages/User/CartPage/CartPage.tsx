@@ -5,15 +5,16 @@ import { ProductCard } from "../../../App/Components";
 import {
   add_or_remove_from_cart,
   get_user_cart_items,
-  get_user_products,
 } from "../../../Service/Products";
-import { cartitem, product, purchaseForm } from "../../../Types/Types";
+import { cartitem, purchaseForm } from "../../../Types/Types";
 import "./../../pages.css";
 import { purchase_products } from "../../../Service/Orders";
+import { MORE_ICON } from "../../../App/Config/Constants";
 
 function CartPage() {
   const [cartItems, SetCartItems] = useState<cartitem[]>([]);
   const [NextUrl, setNextUrl] = useState("");
+  const [loadNext, loader] = useState(false);
   const { user } = useContext(UserContext);
   const [Loading, SetLoading] = useState(false);
   const modalCloser = useRef<HTMLButtonElement>(null);
@@ -22,21 +23,21 @@ function CartPage() {
   const handlePurchase = useCallback(() => {
     SetLoading(true);
     if (!user) return toast.error("Please login to purchase");
-    purchaseForms.map(form=>{
-        if(form.quantity <= 0) return toast.error("Enter a valid quantity")
-    })
+    purchaseForms.map((form) => {
+      if (form.quantity <= 0) return toast.error("Enter a valid quantity");
+    });
     purchase_products(purchaseForms)
-    .then(()=>{
-        toast.success("Purchase completed successfully, see orders")
-        modalCloser.current!.click()
-        SetLoading(false)
-    })
-    .catch((err)=>{
+      .then(() => {
+        toast.success("Purchase completed successfully, see orders");
+        modalCloser.current!.click();
+        SetLoading(false);
+      })
+      .catch((err) => {
         console.log(err);
 
-        SetLoading(false)
-        toast.error("Internal Error")
-    })
+        SetLoading(false);
+        toast.error("Internal Error");
+      });
   }, [purchaseForms]);
 
   const updateProduct = useCallback(
@@ -44,7 +45,9 @@ function CartPage() {
       if (!user) return toast.error("please login");
       add_or_remove_from_cart(prod_id)
         .then(() => {
-        SetPurchaseForms(purchaseForms.filter(form=>form.product != prod_id))
+          SetPurchaseForms(
+            purchaseForms.filter((form) => form.product != prod_id)
+          );
           SetCartItems(
             cartItems.filter((cart_item) => cart_item.product.id != prod_id)
           );
@@ -66,30 +69,32 @@ function CartPage() {
       .catch(() => {
         toast.error("internal error");
       });
-  }, [NextUrl]);
+  }, [loadNext]);
 
   return (
     <>
       <div className="home-main">
         <div className="d-flex w-100">
           <h3>Your Cart</h3>
-          <p
-            className="app-btn1 ms-auto br-7 p-2"
-            data-bs-toggle="modal"
-            data-bs-target="#purchaseModal"
-            onClick={() =>
-              SetPurchaseForms(
-                cartItems.map((cart_item) => {
-                  return {
-                    product: cart_item.product.id,
-                    quantity: 1,
-                  };
-                })
-              )
-            }
-          >
-            Purchase All
-          </p>
+          {cartItems.length > 0 ? (
+            <p
+              className="app-btn1 ms-auto br-7 p-2"
+              data-bs-toggle="modal"
+              data-bs-target="#purchaseModal"
+              onClick={() =>
+                SetPurchaseForms(
+                  cartItems.map((cart_item) => {
+                    return {
+                      product: cart_item.product.id,
+                      quantity: 1,
+                    };
+                  })
+                )
+              }
+            >
+              Purchase All
+            </p>
+          ) : null}
         </div>
 
         <div className="row gap-2">
@@ -99,11 +104,24 @@ function CartPage() {
                 key={cart_item.product.id}
                 product={cart_item.product}
                 updateInHome={updateProduct}
+                sm={true}
               />
             );
           })}
           {!cartItems[0] ? (
             <h5 className="m-3">No items in your cart</h5>
+          ) : null}
+          {NextUrl != "" ? (
+            <div
+              className="col-12 d-flex justify-content-center mt-2"
+              onClick={() => loader(!loadNext)}
+            >
+              <div className="app-btn1 d-flex p-2 br-7 align-items-center">
+                <p className="m-0 me-2">Show more</p>
+
+                <img src={MORE_ICON} width={18} height={18} alt="" />
+              </div>
+            </div>
           ) : null}
         </div>
       </div>
@@ -137,7 +155,10 @@ function CartPage() {
               <div className="row gap-1">
                 {purchaseForms.map((form) => {
                   return (
-                    <div key={form.product} className="mt-3 cart-purchase-item col-11 col-md-5">
+                    <div
+                      key={form.product}
+                      className="mt-3 cart-purchase-item col-11 col-md-5 p-2"
+                    >
                       <p className="mb-2">
                         {
                           cartItems.find(
@@ -198,7 +219,7 @@ function CartPage() {
 
               <div className="modal-footer">
                 <button
-                disabled={Loading}
+                  disabled={Loading}
                   type="button"
                   className="btn bg-app-secondary text-white add-prod-btn"
                   onClick={handlePurchase}

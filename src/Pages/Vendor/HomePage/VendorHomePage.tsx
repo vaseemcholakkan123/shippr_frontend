@@ -3,11 +3,12 @@ import {
   BASE_IMAGE_URL,
   CLOSE,
   DEFAULT_PROD_IMAGES,
+  MORE_ICON,
   OPTIONS,
 } from "../../../App/Config/Constants";
 import { category, product, productform } from "../../../Types/Types";
 import "./../../pages.css";
-import { useState, useEffect, useCallback, useContext, useRef } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import {
   delete_product,
   get_categories,
@@ -18,6 +19,7 @@ import {
   vendor_update_product,
 } from "../../../Service/Products";
 import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const image_looper = [0, 1, 2];
 
@@ -27,12 +29,16 @@ function VendorHomePage() {
   const [Resolved, Setresolved] = useState(false);
   const [Categories, Setcategories] = useState<category[]>([]);
   const [Loading, Setloading] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<number>(-1);
+  const [showDropdown, setShowDropdown] = useState<boolean>(false);
   const modalCloser = useRef<HTMLButtonElement>(null);
   const modalOpener = useRef<HTMLDivElement>(null);
   const [NextUrl, setNextUrl] = useState("");
   const deleteModalCloser = useRef<HTMLButtonElement>(null);
   const [updating, Setupdating] = useState(0);
   const [deleteProduct, SetDeleteProduct] = useState<product | null>(null);
+  const [loadNext, loader] = useState(false);
+  const Navigate = useNavigate()
   const [productform, SetProductForm] = useState<productform>({
     name: "",
     description: "",
@@ -67,7 +73,7 @@ function VendorHomePage() {
   const handleUpdateProductRequest = useCallback(() => {
     if (ValidateForm()) {
       Setloading(true);
-      vendor_update_product(updating, { ...productform, images: prod_images })
+      vendor_update_product(updating, { ...productform, images: prod_images as File[] })
         .then((res) => {
           Setloading(false);
           toast.success("product updated");
@@ -93,6 +99,8 @@ function VendorHomePage() {
 
   const handleUpdateProduct = useCallback((product: product) => {
     Setupdating(product.id);
+    setShowDropdown(false);
+    setActiveDropdown(-1)
     SetProductForm({
       name: product.name,
       description: product.description,
@@ -106,7 +114,7 @@ function VendorHomePage() {
   const handleAddProduct = useCallback(() => {
     if (ValidateForm()) {
       Setloading(true);
-      vendor_add_product({ ...productform, images: prod_images })
+      vendor_add_product({ ...productform, images: prod_images as File[] })
         .then((res) => {
           console.log(res);
 
@@ -142,7 +150,7 @@ function VendorHomePage() {
 
         toast.error("Uknown error");
       });
-  }, [NextUrl]);
+  }, [loadNext]);
 
   return (
     <div className="col-12 col-sm-10 vendor-home">
@@ -166,30 +174,58 @@ function VendorHomePage() {
         </div>
       </div>
 
-      <div className="row gap-1 mt-2">
+      <div className="row gap-1 card-holder d-grid mt-2">
         {VendorProducts.map((product) => {
           return (
-            <div
-              key={product.id}
-              className="product-card col-5 col-sm-3 bg-light"
-            >
+            <div key={product.id} className="product-card bg-light">
               <div className="w-100">
                 <img
                   src={BASE_IMAGE_URL + product.images[0]}
                   alt=""
                   className="product-image w-100"
                 />
-                <img
-                  onClick={() => {
-                    handleUpdateProduct(product);
-                  }}
-                  src={OPTIONS}
-                  data-bs-toggle="modal"
-                  // onClick={() => SetDeleteProduct(product)}
-                  // data-bs-target="#delete-modal"
-                  className="option-png rounded-circle"
-                />
+                <div className="dropdown">
+                  <img
+                    onClick={() => {
+                      setShowDropdown(!showDropdown)
+                      setActiveDropdown(product.id)
+                    }}
+                    src={OPTIONS}
+                    className="option-png rounded-circle"
+                    role="button"
+                    id={`dropdownMenuButton${product.id}`}
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  />
+                  <ul
+                    className={`dropdown-menu ${showDropdown && product.id === activeDropdown ? "show" : ""}`}
+                    aria-labelledby={`dropdownMenuButton${product.id}`}
+                  >
+                    <li className="dropdown-item" onClick={()=>Navigate(`/view-product/${product.id}`)}>View</li>
+                    <li
+                      className="dropdown-item"
+                      onClick={() => {
+                        handleUpdateProduct(product);
+                      }}
+                    >
+                      Edit
+                    </li>
+                    <li
+                      className="dropdown-item"
+                      onClick={() => {
+                        SetDeleteProduct(product)
+                        setShowDropdown(false);
+                        setActiveDropdown(-1)
+                      }}
+                      data-bs-toggle="modal"
+                      data-bs-target="#delete-modal"
+                    >
+                      Delete
+                    </li>
+                  </ul>
+                </div>
               </div>
+
               <div className="product-card-texts">
                 <div className="d-flex w-100">
                   <p className="product-title">{product.name}</p>
@@ -211,6 +247,19 @@ function VendorHomePage() {
             <div></div>
             <div></div>
             <div></div>
+          </div>
+        ) : null}
+
+        {NextUrl != "" ? (
+          <div
+            className="col-12 d-flex justify-content-center mt-2"
+            onClick={() => loader(!loadNext)}
+          >
+            <div className="app-btn1 d-flex p-2 br-7 align-items-center">
+              <p className="m-0 me-2">Show more</p>
+
+              <img src={MORE_ICON} width={18} height={18} alt="" />
+            </div>
           </div>
         ) : null}
       </div>
