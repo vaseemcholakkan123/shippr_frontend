@@ -1,5 +1,5 @@
-export const BASE_URL = 'http://15.206.116.227/'
-export const BASE_IMAGE_URL = 'http://15.206.116.227'
+export const BASE_URL = 'https://shippr.t4technow.com/'
+export const BASE_IMAGE_URL = 'https://shippr.t4technow.com'
 import DEFAULT_USER_PROFILE from '../../assets/default-user-profile-picture.webp'
 import CART_PNG from '../../assets/cartpng.png'
 import LOGOUT_PNG from '../../assets/logoutpng.png'
