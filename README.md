@@ -4,7 +4,7 @@
 
 <h2>🚀 Demo</h2>
 
-[Live demo](dasd) <br>
+[Live demo](https://shippr-vaseem.vercel.app/) <br>
 [API Doc](https://documenter.getpostman.com/view/25947467/2s9Y5eNfJh) <br>
 [Database Design](https://drawsql.app/teams/vaseem-1/diagrams/shippr-db)
 
@@ -33,36 +33,19 @@ Here're some of the project's best features:
 <p>1. Clone the project</p>
 
 ```
-git clone https://github.com/vaseemcholakkan123/shippr_backend.git
-```
-
-<p>2. Create a virtualenv</p>
-
-```
-virtualenv venv
-```
-
-<p>3. Activate venv</p>
-
-##### For Linux
-```
-source venv/bin/activate
-```
-##### For Windows
-```
-venv\Scripts\activate
+git clone https://github.com/vaseemcholakkan123/shippr_frontend.git
 ```
 
 <p>4. Install requirements</p>
 
 ```
-pip install -r requirements.txt
+npm install
 ```
 
 <p>5. Start server</p>
 
 ```
-python manage.py runserver
+npm run dev
 ```
 
   
@@ -75,4 +58,4 @@ Technologies used in the project:
 *   React
 *   TypeScript
 *   DRF
-
+*   Django Unit Test
