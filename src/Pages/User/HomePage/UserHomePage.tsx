@@ -35,8 +35,15 @@ function UserHomePage() {
   const updateProduct = useCallback(
     (prod_id: number) => {
       if (!user) return toast.error("please login");
+      Setproducts(
+        products.map((product) => {
+          if (product.id == prod_id)
+            product.is_in_cart = !product.is_in_cart;
+          return product;
+        })
+      );
       add_or_remove_from_cart(prod_id)
-        .then(() => {
+        .catch(() => {
           Setproducts(
             products.map((product) => {
               if (product.id == prod_id)
@@ -44,8 +51,6 @@ function UserHomePage() {
               return product;
             })
           );
-        })
-        .catch(() => {
           toast.error("Network error, try again later");
         });
     },
