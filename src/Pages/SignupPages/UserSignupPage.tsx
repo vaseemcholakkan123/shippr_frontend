@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import React, { useCallback, useState } from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { user_signup } from "../../Service/Auth";
 
@@ -9,6 +9,7 @@ function UserSignupPage() {
 
   const validateUsernamePasswords = 
   (username: string, password1: string , password2: string) => {
+        console.log("testsss");
         
       if(!username){
         toast.error("Enter a username")
@@ -66,6 +67,9 @@ function UserSignupPage() {
     const password2 = password_inp2.value;
 
     const validated = validateUsernamePasswords(username , password1 , password2)
+
+    console.log("validated" , validated);
+    
 
     if (!validated) return Setloading(false);
     if(validated){
