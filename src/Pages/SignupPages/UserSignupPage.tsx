@@ -68,7 +68,10 @@ function UserSignupPage() {
     const password1 = password_inp1.value;
     const password2 = password_inp2.value;
 
-    if(validateUsernamePasswords(username , password1 , password2)){
+    const validated = validateUsernamePasswords(username , password1 , password2)
+
+    if (!validated) return;
+    if(validated){
         Setloading(true)
 
         user_signup(username , password1)
