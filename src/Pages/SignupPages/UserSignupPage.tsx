@@ -9,8 +9,6 @@ function UserSignupPage() {
 
   const validateUsernamePasswords = 
   (username: string, password1: string , password2: string) => {
-        console.log("testsss");
-        
       if(!username){
         toast.error("Enter a username")
         return false
@@ -67,9 +65,6 @@ function UserSignupPage() {
     const password2 = password_inp2.value;
 
     const validated = validateUsernamePasswords(username , password1 , password2)
-
-    console.log("validated" , validated);
-    
 
     if (!validated) return Setloading(false);
     if(validated){
