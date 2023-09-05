@@ -30,8 +30,7 @@ function ProductDetail({ product, UpdateInDetailPage }: detailprops) {
         modalCloser.current!.click()
         SetLoading(false)
     })
-    .catch((err)=>{
-        console.log(err);
+    .catch(()=>{
         
         SetLoading(false)
         toast.error("Internal Error")
@@ -106,7 +105,7 @@ function ProductDetail({ product, UpdateInDetailPage }: detailprops) {
                 }}
               />
             </div>
-            <p className="product-desc">{product.description}</p>
+            <p className="product-desc mt-2 mb-3 mb-md-0 mt-md-1">{product.description}</p>
           </div>
 
           <div>
@@ -121,7 +120,7 @@ function ProductDetail({ product, UpdateInDetailPage }: detailprops) {
               <h6 className="detail-price">₹‎ {product.price}</h6>
             </div>
             <p
-              className="w-100 app-btn1 br-7 p-2 text-center mt-1"
+              className="w-100 app-btn1 br-7 p-2 text-center mt-md-1 mt-2"
               data-bs-toggle="modal"
               data-bs-target="#purchaseModal"
               onClick={() =>

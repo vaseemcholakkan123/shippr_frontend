@@ -18,7 +18,6 @@ function OrderPage() {
     get_user_orders(NextUrl)
       .then((res) => {
         SetOrders(res.data.results);
-        console.log(res);
 
         if (res.data.next) setNextUrl(res.data.next.split("?")[1]);
         else setNextUrl("");

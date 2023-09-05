@@ -30,8 +30,7 @@ function OrdersPage() {
           SetUpdateOrder(null);
           modalCloser.current!.click();
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
           toast.error("Unknown Error");
         });
   }, [UpdateOrder]);
@@ -40,7 +39,6 @@ function OrdersPage() {
     get_vendor_orders(NextUrl)
       .then((res) => {
         SetVendorOrders(res.data.results);
-        console.log(res);
 
         if (res.data.next) setNextUrl(res.data.next.split("?")[1]);
         else setNextUrl("");

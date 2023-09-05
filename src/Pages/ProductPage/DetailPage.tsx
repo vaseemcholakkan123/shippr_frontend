@@ -28,8 +28,6 @@ function DetailPage() {
   useEffect( ()=>{
     prod_id && get_product_by_id(prod_id)
     .then(res=>{
-      console.log(res);
-      
       Setproduct(res.data)
     })
     .catch(()=>{

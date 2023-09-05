@@ -32,7 +32,6 @@ export async function get_vendor_orders(nexturl : string) {
 
 export async function update_order_status(order_id:number , new_status:string) {
     try {
-        console.log(new_status);
         
         const response = await ShipprAxios.patch(`services/update-order-status/${order_id}`,{status : new_status})
         return Promise.resolve(response)

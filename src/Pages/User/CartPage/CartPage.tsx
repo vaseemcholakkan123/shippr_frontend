@@ -32,9 +32,7 @@ function CartPage() {
         modalCloser.current!.click();
         SetLoading(false);
       })
-      .catch((err) => {
-        console.log(err);
-
+      .catch(() => {
         SetLoading(false);
         toast.error("Internal Error");
       });

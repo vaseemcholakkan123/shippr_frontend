@@ -92,7 +92,6 @@ function VendorHomePage() {
           if (err.response.data.message) {
             toast.error(err.response.data.message);
           } else toast.error("Unknown error");
-          console.log(err);
         });
     }
   }, [productform, prod_images, VendorProducts, updating]);
@@ -116,7 +115,6 @@ function VendorHomePage() {
       Setloading(true);
       vendor_add_product({ ...productform, images: prod_images as File[] })
         .then((res) => {
-          console.log(res);
 
           Setloading(false);
           toast.success("product added");
@@ -129,7 +127,7 @@ function VendorHomePage() {
           if (err.response.data.message) {
             toast.error(err.response.data.message);
           } else toast.error("Unknown error");
-          console.log(err);
+
         });
     }
   }, [productform, prod_images, VendorProducts]);
@@ -138,16 +136,12 @@ function VendorHomePage() {
     get_vendor_products(NextUrl)
       .then((res) => {
         Setresolved(true);
-        console.log(res);
-
         SetVendorProducts(res.data.results);
 
         if (res.data.next) setNextUrl(res.data.next.split("?")[1]);
         else setNextUrl("");
       })
-      .catch((err) => {
-        console.log(err);
-
+      .catch(() => {
         toast.error("Uknown error");
       });
   }, [loadNext]);
@@ -512,8 +506,7 @@ function VendorHomePage() {
                         deleteModalCloser.current?.click();
                         e.currentTarget.innerText = "Delete";
                       })
-                      .catch((er) => {
-                        console.log(er);
+                      .catch(() => {
                         e.currentTarget.innerText = "Delete";
                       });
                 }}

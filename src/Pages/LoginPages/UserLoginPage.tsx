@@ -62,8 +62,6 @@ function UserLoginPage() {
             localStorage.setItem("access-token" , res.data.access_token)
             localStorage.setItem("refresh-token" , res.data.refresh_token)
             setUserData && setUserData(res.data.user)
-            if(setUserData) console.log("exists fuc" , res.data.user);
-            
 
             toast.success("Logged in")
             Navigate('/')

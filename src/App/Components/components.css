@@ -102,6 +102,12 @@
     height: 80vh;
     background-color: rgba(128, 128, 128, 0.204);
 }
+@media (max-width:768px) {
+    .detail-images{
+        height: 60vh;
+    }
+
+}
 
 .detail-images img{
     object-fit: contain;
