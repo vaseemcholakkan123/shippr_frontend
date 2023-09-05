@@ -7,9 +7,8 @@ function UserSignupPage() {
   const Navigate = useNavigate();
   const [Loading , Setloading] = useState(false);
 
-  const validateUsernamePasswords = useCallback(
-    
-    (username: string, password1: string , password2: string) => {
+  const validateUsernamePasswords = 
+  (username: string, password1: string , password2: string) => {
         
       if(!username){
         toast.error("Enter a username")
@@ -41,11 +40,9 @@ function UserSignupPage() {
       }
 
       else return true
-    },
-    []
-  );
+    }
 
-  const handleSubmit = useCallback((event: React.BaseSyntheticEvent) => {
+  const handleSubmit = (event: React.BaseSyntheticEvent) => {
 
     event.preventDefault();
     Setloading(true);
@@ -70,7 +67,7 @@ function UserSignupPage() {
 
     const validated = validateUsernamePasswords(username , password1 , password2)
 
-    if (!validated) return;
+    if (!validated) return Setloading(false);
     if(validated){
         Setloading(true)
 
@@ -88,7 +85,7 @@ function UserSignupPage() {
         })
     }
 
-  }, []);
+  }
 
 
 
