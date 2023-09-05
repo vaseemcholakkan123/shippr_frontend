@@ -3,6 +3,7 @@ import { order } from "../../../Types/Types";
 import "./../components.css";
 import { updateTimeSince } from "../../../Service/Products";
 import { Dispatch,SetStateAction } from "react";
+import { OPTION_ICON } from "../../Config/Constants";
 
 type orderCardProps = {
   order: order;
@@ -26,7 +27,11 @@ function VendorOrderCard({ order , SetUpdateOrder }: orderCardProps) {
             Item :{" "}
             <span className="vendor-order-item">{order.product.name}</span>
           </h6>
-          <p
+            <div className="order-option" data-bs-toggle="modal"
+            data-bs-target="#updateOrderModal">
+              <img src={OPTION_ICON} alt="" />
+            </div>
+          <p 
             data-bs-toggle="modal"
             data-bs-target="#updateOrderModal"
           >

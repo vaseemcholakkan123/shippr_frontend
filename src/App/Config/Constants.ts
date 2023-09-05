@@ -11,8 +11,9 @@ import TO_CART from '../../assets/tocart.png'
 import IN_CART from '../../assets/incart.png'
 import CATEGORY from '../../assets/categories.png'
 import FILTER_ICON from '../../assets/sort.png'
+import OPTION_ICON from '../../assets/editing.png'
 import MORE_ICON from '../../assets/show-more-button.png'
 import DEFAULT_PROD_IMAGES from '../../assets/image-editor.png'
 
 
-export { ADD , OPTIONS, CATEGORY, MORE_ICON, FILTER_ICON, DEFAULT_USER_PROFILE ,IN_CART, TO_CART, CART_PNG , LOGOUT_PNG , ORDER_PNG , DEFAULT_PROD_IMAGES , CLOSE }
+export { ADD , OPTIONS, CATEGORY, OPTION_ICON, MORE_ICON, FILTER_ICON, DEFAULT_USER_PROFILE ,IN_CART, TO_CART, CART_PNG , LOGOUT_PNG , ORDER_PNG , DEFAULT_PROD_IMAGES , CLOSE }

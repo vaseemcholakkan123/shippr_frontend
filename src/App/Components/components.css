@@ -172,7 +172,21 @@
 .order-texts{
     padding: .4rem;
     box-sizing: border-box;
+    position: relative;
+    width: 100%;
 }
+.order-option{
+    position: absolute;
+    z-index: 100;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+}
+.order-option img{
+    width: 18px;
+    height: 18px;
+}
+
 .vendor-order-item{
     cursor: pointer;
 }
